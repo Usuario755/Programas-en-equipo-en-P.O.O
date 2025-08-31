@@ -69,12 +69,12 @@ public:
 int main() {
     int gd = DETECT, gm;
     float al, ba;
-    int cx, cy, opc;
-    
+    int cx, cy, opc, cx1, cy2;
+
     initgraph(&gd, &gm, "C:\\Turboc3\\BGI"); // Asegúrate de que esta ruta sea correcta
 	
 	
-		
+	
 		cout<<"\nIntroduce base: ";
 		cin>>al;
 		cout<<"\nIntroduce alrtura: ";
@@ -83,14 +83,19 @@ int main() {
 		cin>>cx;
 		cout<<"\nIntroduce coordenada vertical: ";
 		cin>>cy;
-		Triangulo t1(cx, cy, ba, al);// coorde nada x, coorde nada y, base y altura
+		Triangulo t1(cx, cy, ba, al);// coordenada x, coordenada y, base y altura
 	    t1.pintarTriangulo();
 	
 	    cout << "Área: " << t1.calcularAreaTriangulo() << endl;
 	    cout << "Perímetro: " << t1.calcularPerimetroTriangulo() << endl;
 	
 	    delay(2000);
-	    t1.trasladarTriangulo(50, -50);
+	    
+	    cout<<"\nIntroduce la nueva coordenada horizontal: ";
+		cin>>cx1;
+		cout<<"\nIntroduce la nueva coordenada vertical: ";
+		cin>>cy2;
+	    t1.trasladarTriangulo(cx1, cy2);//ejemplo 50, -50
 	
 	    delay(3000);
 	    closegraph();
