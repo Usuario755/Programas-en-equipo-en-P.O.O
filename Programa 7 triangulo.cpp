@@ -1,6 +1,7 @@
 #include <graphics.h>
 #include <iostream>
 #include <cmath>
+#include <locale>
 using namespace std;
 
 class Triangulo {
@@ -65,41 +66,88 @@ public:
     }
 };
 
-// Ejemplo de uso
-int main() {
-    int gd = DETECT, gm;
-    float al, ba;
-    int cx, cy, opc, cx1, cy2;
+void Editor();
+void presenta();
 
-    initgraph(&gd, &gm, "C:\\Turboc3\\BGI"); // Asegúrate de que esta ruta sea correcta
-	
-	
-	
-		cout<<"\nIntroduce base: ";
-		cin>>al;
-		cout<<"\nIntroduce alrtura: ";
-		cin>>ba;
-		cout<<"\nIntroduce coordenada horizontal: ";
-		cin>>cx;
-		cout<<"\nIntroduce coordenada vertical: ";
-		cin>>cy;
-		Triangulo t1(cx, cy, ba, al);// coordenada x, coordenada y, base y altura
-	    t1.pintarTriangulo();
-	
-	    cout << "Área: " << t1.calcularAreaTriangulo() << endl;
-	    cout << "Perímetro: " << t1.calcularPerimetroTriangulo() << endl;
-	
-	    delay(2000);
-	    
-	    cout<<"\nIntroduce la nueva coordenada horizontal: ";
-		cin>>cx1;
-		cout<<"\nIntroduce la nueva coordenada vertical: ";
-		cin>>cy2;
-	    t1.trasladarTriangulo(cx1, cy2);//ejemplo 50, -50
-	
-	    delay(3000);
-	    closegraph();
-	    
-    
+
+int main() {
+    setlocale(LC_CTYPE, "Spanish");
+    int gd = DETECT, gm;
+    initgraph(&gd, &gm, "C:\\Turboc3\\BGI");
+
+    int base = 0, altura = 0;
+    int x = 0, y = 0;
+    int dx = 0, dy = 0;
+    int opc;
+	presenta();
+    Triangulo t1;
+
+    do {
+        cout << "\n1. Establecer medidas y calcular área y perímetro";
+        cout << "\n2. Establecer coordenadas iniciales y dibujar";
+        cout << "\n3. Trasladar figura";
+        cout << "\n4. Salir";
+        cout << "\nSelecciona una opción: ";
+        cin >> opc;
+
+        switch (opc) {
+            case 1:
+                cout << "\nIntroduce base: ";
+                cin >> base;
+                cout << "\nIntroduce altura: ";
+                cin >> altura;
+                t1 = Triangulo(x, y, base, altura);
+                cout << "Área: " << t1.calcularAreaTriangulo() << endl;
+                cout << "Perímetro: " << t1.calcularPerimetroTriangulo() << endl;
+                break;
+
+            case 2:
+                cout << "\nIntroduce coordenada horizontal: ";
+                cin >> x;
+                cout << "\nIntroduce coordenada vertical: ";
+                cin >> y;
+                t1 = Triangulo(x, y, base, altura);
+                t1.pintarTriangulo();
+                break;
+
+            case 3:
+                cout << "\nIntroduce desplazamiento horizontal: ";
+                cin >> dx;
+                cout << "\nIntroduce desplazamiento vertical: ";
+                cin >> dy;
+                t1.trasladarTriangulo(dx, dy);
+                break;
+
+            case 4:
+                cout << "\nFIN DEL PROGRAMA";
+                break;
+
+            default:
+                cout << "\nOpción incorrecta";
+                Editor();
+        }
+
+        delay(2000);
+    } while (opc != 4);
+
+    closegraph();
     return 0;
+}
+
+//Procedimiento
+void presenta(){
+	cout<<"\nUniversidad Nacional Autonoma de Mexico";
+	cout<<"\nFacultad de Estucios Superiones Acatlan";
+	cout<<"\nLic. en Matematica Aplicadas y Computacion";
+	cout<<"\nProgramación Orientada a Objetos";
+	cout<<"\nGrupo: 1301";
+	cout<<"\nMaestra: Eslava García Georgina";
+	cout<<"\nIntegrantes:";
+	cout<<"\nGarnica Santos Orlando";
+	cout<<"\nNavarrete Basurto Baruch";
+	cout<<"\nPerez Perez Sergio";
+	cout<<"\n";
+}
+void Editor(){
+	cout<<"\n Desarrollado por 10101101";
 }
