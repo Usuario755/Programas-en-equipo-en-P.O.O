@@ -1,0 +1,135 @@
+//Polígono de 6 lados
+#include <math.h>
+#include <iostream>
+#include <graphics.h>
+#include <conio.h>
+#include <locale>
+using namespace std;
+
+class Poligono{
+	float radio;
+	int points[12];
+	int x;
+	int y;
+	int vis;
+	public:
+		Poligono(int, int, float);
+		void pintaPoligono();//pintarPoligono6()
+		void ocultaPoligono();//ocultarPoligono
+		void trasladaPoligono(int, int);//trasladarPoligono
+		void mueveHDPoligono();//
+		void mueveHIPoligono();//
+		void mueveVARPoligono();//
+		void mueveVABPoligono();//
+		float calcularAreaPoligono();//calcularAreaPoligono
+		float calcularPerimetroPoligono();//calcularPerimetroPoligono
+};
+float Poligono::calcularAreaPoligono(){
+	return (3*sqrt(3)/2)*radio*radio;
+}
+float Poligono::calcularPerimetroPoligono(){
+	return 6 * radio;
+}
+void Poligono::mueveVABPoligono(){
+	for(int i=25;i>0;i--){
+		trasladaPoligono(x,y-i);
+		delay(25);
+	}
+}
+void Poligono::mueveVARPoligono(){
+	for(int i=0;i<25;i++){
+		trasladaPoligono(x,y+i);
+		delay(25);
+	}
+}
+void Poligono::mueveHIPoligono(){
+	for(int i=50;i>0;i--){
+		trasladaPoligono(x-i,y);
+		delay(25);
+	}
+}
+void Poligono::mueveHDPoligono(){
+	for(int i=0;i<50;i++){
+		trasladaPoligono(x+i,y);
+		delay(25);
+	}
+}
+void Poligono::trasladaPoligono(int nx, int ny){
+	if(vis==1){
+		ocultaPoligono();
+		this->x=nx;
+		this->y=ny;
+		pintaPoligono();
+	}
+}
+void Poligono::ocultaPoligono() {
+    unsigned int guardaColor = getcolor();
+    if (vis == 1) {
+        setcolor(getbkcolor()); // Color de fondo para borrar
+
+        // Borrar los lados del hexágono
+        for (int i = 0; i < 6; i++) {
+            int x1 = points[2 * i];
+            int y1 = points[2 * i + 1];
+            int x2 = points[(2 * ((i + 1) % 6))];
+            int y2 = points[(2 * ((i + 1) % 6)) + 1];
+            line(x1, y1, x2, y2);
+        }
+
+        vis = 0;
+        setcolor(guardaColor); // Restaurar color original
+    }
+}
+void Poligono::pintaPoligono() {
+    for (int i = 0; i < 6; i++) {
+        points[2 * i]     = x + radio * cos(i * M_PI / 3);
+        points[2 * i + 1] = y + radio * sin(i * M_PI / 3);
+    }
+
+    for (int i = 0; i < 6; i++) {
+        int x1 = points[2 * i];
+        int y1 = points[2 * i + 1];
+        int x2 = points[(2 * ((i + 1) % 6))];
+        int y2 = points[(2 * ((i + 1) % 6)) + 1];
+        line(x1, y1, x2, y2);
+    }
+
+    vis = 1;
+}
+Poligono::Poligono(int nx=200, int ny=200, float nr=100){
+	this->x=nx;
+	this->y=ny;
+	this->radio=nr;
+	this->vis=0;
+	this->points;
+}
+int main(){
+	
+	
+	Poligono c1(800,300,200);//El ultimo numero es el radio
+	
+
+	int dispositivo=DETECT, mod;
+	initgraph(&dispositivo,&mod,"");
+	cout<<"\nPerimetro del Hexagono igual a= "<<c1.calcularPerimetroPoligono();
+	cout<<"\nArea del Hexagono igual a= "<<c1.calcularAreaPoligono();
+	getch();
+	
+	c1.pintaPoligono();
+	
+	getch();
+	c1.mueveHDPoligono();
+	
+	getch();
+	c1.mueveHIPoligono();
+	
+	getch();
+	c1.mueveVABPoligono();
+
+	getch();
+	c1.mueveVARPoligono();
+
+	getch();
+	closegraph();
+	return 0;
+}
