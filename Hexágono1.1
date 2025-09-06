@@ -1,0 +1,210 @@
+//Polígono de 6 lados
+#include <math.h>
+#include <iostream>
+#include <graphics.h>
+#include <conio.h>
+#include <locale>
+using namespace std;
+
+class Poligono{
+	float radio;
+	int points[12];
+	int x;
+	int y;
+	int vis;
+	public:
+		Poligono(int, int, float);
+		void pintaPoligono();//pintarPoligono6()
+		void ocultaPoligono();//ocultarPoligono
+		void trasladaPoligono(int, int);//trasladarPoligono
+		void mueveHDPoligono();//
+		void mueveHIPoligono();//
+		void mueveVARPoligono();//
+		void mueveVABPoligono();//
+		float calcularAreaPoligono();//calcularAreaPoligono
+		float calcularPerimetroPoligono();//calcularPerimetroPoligono
+};
+float Poligono::calcularAreaPoligono(){
+	return (3*sqrt(3)/2)*radio*radio;
+}
+float Poligono::calcularPerimetroPoligono(){
+	return 6 * radio;
+}
+void Poligono::mueveVABPoligono(){
+	for(int i=25;i>0;i--){
+		trasladaPoligono(x,y-i);
+		delay(25);
+	}
+}
+void Poligono::mueveVARPoligono(){
+	for(int i=0;i<25;i++){
+		trasladaPoligono(x,y+i);
+		delay(25);
+	}
+}
+void Poligono::mueveHIPoligono(){
+	for(int i=50;i>0;i--){
+		trasladaPoligono(x-i,y);
+		delay(25);
+	}
+}
+void Poligono::mueveHDPoligono(){
+	for(int i=0;i<50;i++){
+		trasladaPoligono(x+i,y);
+		delay(25);
+	}
+}
+void Poligono::trasladaPoligono(int nx, int ny){
+	if(vis==1){
+		ocultaPoligono();
+		this->x=nx;
+		this->y=ny;
+		pintaPoligono();
+	}
+}
+void Poligono::ocultaPoligono() {
+    unsigned int guardaColor = getcolor();
+    if (vis == 1) {
+        setcolor(getbkcolor()); // Color de fondo para borrar
+
+        // Borrar los lados del hexágono
+        for (int i = 0; i < 6; i++) {
+            int x1 = points[2 * i];
+            int y1 = points[2 * i + 1];
+            int x2 = points[(2 * ((i + 1) % 6))];
+            int y2 = points[(2 * ((i + 1) % 6)) + 1];
+            line(x1, y1, x2, y2);
+        }
+
+        vis = 0;
+        setcolor(guardaColor); // Restaurar color original
+    }
+}
+void Poligono::pintaPoligono() {
+    for (int i = 0; i < 6; i++) {
+        points[2 * i]     = x + radio * cos(i * M_PI / 3);
+        points[2 * i + 1] = y + radio * sin(i * M_PI / 3);
+    }
+
+    for (int i = 0; i < 6; i++) {
+        int x1 = points[2 * i];
+        int y1 = points[2 * i + 1];
+        int x2 = points[(2 * ((i + 1) % 6))];
+        int y2 = points[(2 * ((i + 1) % 6)) + 1];
+        line(x1, y1, x2, y2);
+    }
+
+    vis = 1;
+}
+Poligono::Poligono(int nx=200, int ny=200, float nr=100){
+	this->x=nx;
+	this->y=ny;
+	this->radio=nr;
+	this->vis=0;
+	this->points;
+}
+void presenta();
+void Editor();
+
+int main() {
+	setlocale(LC_ALL, "");
+    int CoordenadaY, Coordenadax, opc;
+    float Radio;
+
+    presenta();
+
+    // Inicialización de gráficos
+    int dispositivo = DETECT, mod;
+    initgraph(&dispositivo, &mod, "");
+
+    // Crear objeto polígono con valores iniciales
+    Poligono c1(Coordenadax, CoordenadaY, Radio);
+
+    do {
+        cout << "\n¿Qué desea hacer?";
+        cout << "\n1. Generar polígono";
+        cout << "\n2. Calcular Perímetro y Área del polígono";
+        cout << "\n3. Mover el polígono a la derecha";
+        cout << "\n4. Mover el polígono a la izquierda";
+        cout << "\n5. Mover el polígono hacia arriba";
+        cout << "\n6. Mover el polígono hacia abajo";
+        cout << "\n7. Salir";
+        cout << "\nSeleccione una opción: ";
+        cin >> opc;
+
+        switch (opc) {
+            case 1:
+                cout << "\nDar coordenadas en x: ";
+                cin >> Coordenadax;
+                cout << "\nDar coordenadas en y: ";
+                cin >> CoordenadaY;
+                cout << "\nDar radio del polígono: ";
+                cin >> Radio;
+                // Crear nuevo polígono con los datos ingresados
+                c1 = Poligono(Coordenadax, CoordenadaY, Radio);
+                c1.pintaPoligono();
+                
+                
+                break;
+
+            case 2:
+                
+                cout << "\nPerímetro del hexágono: " << c1.calcularPerimetroPoligono();
+                cout << "\nÁrea del hexágono: " << c1.calcularAreaPoligono();
+                break;
+
+            case 3:
+                c1.mueveHDPoligono();
+                
+                break;
+
+            case 4:
+                c1.mueveHIPoligono();
+                
+                break;
+
+            case 5:
+                c1.mueveVABPoligono();
+                
+                break;
+
+            case 6:
+                c1.mueveVARPoligono();
+                
+                break;
+
+            case 7:
+                cout << "\nFin del programa.";
+                break;
+
+            default:
+                cout << "\nOpción no válida.";
+                Editor();
+                
+                break;
+        }
+
+    } while (opc != 7);
+
+    closegraph();
+    return 0;
+}
+
+
+//Procedimiento
+void presenta(){
+	cout<<"\nUniversidad Nacional Autonoma de Mexico";
+	cout<<"\nFacultad de Estucios Superiones Acatlan";
+	cout<<"\nLic. en Matematica Aplicadas y Computacion";
+	cout<<"\nProgramación Orientada a Objetos";
+	cout<<"\nGrupo: 1301";
+	cout<<"\nMaestra: Eslava García Georgina";
+	cout<<"\nIntegrantes:";
+	cout<<"\nGarnica Santos Orlando";
+	cout<<"\nNavarrete Basurto Baruch";
+	cout<<"\nPerez Perez Sergio";
+	cout<<"\n";
+}
+void Editor(){
+	cout<<"\n Desarrollado por 10101101";
+}
