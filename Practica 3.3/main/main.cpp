@@ -76,6 +76,7 @@ public:
 
 int main() {
     int pantalla = DETECT, modo;
+    presenta();
     initgraph(&pantalla, &modo, "");
 
     Barco miBarco(150, 200);
@@ -88,7 +89,9 @@ int main() {
     mar.animar();
 
     getch();
-
+    Editor();
+    getch();
     closegraph();
     return 0;
 }
+
