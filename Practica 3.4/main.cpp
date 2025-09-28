@@ -121,6 +121,7 @@ public:
 };
 int main() {
     int dispositivo = DETECT, mod;
+	presenta();
     initgraph(&dispositivo, &mod, "C:\\TC\\BGI");
 	Pollo p2(300, 200); // Posición personalizada
     Pollo p1;
@@ -147,9 +148,11 @@ int main() {
     p2.mueveARV();
     p2.dibujar();
     getch();
+	Editor();
     getch();
     
     closegraph();
     return 0;
 }
+
 
