@@ -25,18 +25,18 @@ private:
     Rectangulo pico;
 
 public:
-    Pollo() :
-        cabeza(150, 100, 50, 50),
-        cuerpo(140, 150, 70, 80),
-        pata1(150, 230, 10, 30),
-        pata2(180, 230, 10, 30),
-        collar(170, 145, 20, 10),
-        cresta(170, 90, 20, 10),
-        pico(170, 120, 20, 10),
-        ojo1(160, 115, 5),
-        pupila1(160, 115, 2),
-        ojo2(190, 115, 5),
-        pupila2(190, 115, 2)
+    Pollo(int x = 150, int y = 100) :
+        cabeza(x, y, 50, 50),
+        cuerpo(x - 10, y + 50, 70, 80),
+        pata1(x, y + 130, 10, 30),
+        pata2(x + 30, y + 130, 10, 30),
+        collar(x + 20, y + 45, 20, 10),
+        cresta(x + 20, y - 10, 20, 10),
+        pico(x + 20, y + 20, 20, 10),
+        ojo1(x + 10, y + 15, 5),
+        pupila1(x + 10, y + 15, 2),
+        ojo2(x + 40, y + 15, 5),
+        pupila2(x + 40, y + 15, 2)
     {}
 
     void dibujar() {
@@ -122,22 +122,33 @@ public:
 int main() {
     int dispositivo = DETECT, mod;
     initgraph(&dispositivo, &mod, "C:\\TC\\BGI");
-
+	Pollo p2(300, 200); // Posición personalizada
     Pollo p1;
     p1.dibujar();
+    p2.dibujar();
     getch();
 	p1.mueveDH();
 	p1.dibujar();
+	p2.mueveDH();
+	p2.dibujar();
 	getch();
 	p1.mueveIH();
 	p1.dibujar();
+	p2.mueveIH();
+	p2.dibujar();
     getch();
     p1.mueveABV();
     p1.dibujar();
+    p2.mueveABV();
+    p2.dibujar();
     getch();
     p1.mueveARV();
     p1.dibujar();
+    p2.mueveARV();
+    p2.dibujar();
     getch();
+    getch();
+    
     closegraph();
     return 0;
 }
