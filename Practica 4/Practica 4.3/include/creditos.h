@@ -15,10 +15,10 @@ void presenta(){
 	cout<<"\nUniversidad Nacional Autonoma de Mexico";
 	cout<<"\nFacultad de Estucios Superiones Acatlan";
 	cout<<"\nLic. en Matematica Aplicadas y Computacion";
-	cout<<"\nMateria:Programación Orientada a Objetos";
+	cout<<"\nMateria:ProgramaciÃ³n Orientada a Objetos";
 	cout<<"\nGrupo: 1301";
-	cout<<"\nMaestra: Eslava García Georgina";
-	cout<<"\nPráctica: 3.4";
+	cout<<"\nMaestra: Eslava GarcÃ­a Georgina";
+	cout<<"\nPrÃ¡ctica: 4.3";
 	cout<<"\nIntegrantes:";
 	cout<<"\nGalindo Castillo Sayid Amir"; 
 	cout<<"\nGarnica Santos Orlando";
@@ -29,3 +29,4 @@ void presenta(){
 void Editor(){
 	cout<<"\n Editado por 10101101";
 }
+
