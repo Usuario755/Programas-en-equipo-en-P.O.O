@@ -1,0 +1,9 @@
+E:\Documentos\ESTUDIO\FES ACATLAN\Tercer Semestre\Programacion orientada a objetos\Practica 5\Proyecto final\Proyecto final\bin\Debug\Proyecto final.exe
+E:\Documentos\ESTUDIO\FES ACATLAN\Tercer Semestre\Programacion orientada a objetos\Practica 5\Proyecto final\Proyecto final\bin\Debug\Proyecto final.pdb
+E:\Documentos\ESTUDIO\FES ACATLAN\Tercer Semestre\Programacion orientada a objetos\Practica 5\Proyecto final\Proyecto final\obj\Debug\Proyecto final.csproj.AssemblyReference.cache
+E:\Documentos\ESTUDIO\FES ACATLAN\Tercer Semestre\Programacion orientada a objetos\Practica 5\Proyecto final\Proyecto final\obj\Debug\Proyecto_final.Form1.resources
+E:\Documentos\ESTUDIO\FES ACATLAN\Tercer Semestre\Programacion orientada a objetos\Practica 5\Proyecto final\Proyecto final\obj\Debug\Proyecto_final.Properties.Resources.resources
+E:\Documentos\ESTUDIO\FES ACATLAN\Tercer Semestre\Programacion orientada a objetos\Practica 5\Proyecto final\Proyecto final\obj\Debug\Proyecto final.csproj.GenerateResource.cache
+E:\Documentos\ESTUDIO\FES ACATLAN\Tercer Semestre\Programacion orientada a objetos\Practica 5\Proyecto final\Proyecto final\obj\Debug\Proyecto final.csproj.CoreCompileInputs.cache
+E:\Documentos\ESTUDIO\FES ACATLAN\Tercer Semestre\Programacion orientada a objetos\Practica 5\Proyecto final\Proyecto final\obj\Debug\Proyecto final.exe
+E:\Documentos\ESTUDIO\FES ACATLAN\Tercer Semestre\Programacion orientada a objetos\Practica 5\Proyecto final\Proyecto final\obj\Debug\Proyecto final.pdb
