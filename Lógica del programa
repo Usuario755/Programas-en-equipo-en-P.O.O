@@ -1,0 +1,133 @@
+using System;
+
+class Program
+{
+    // Temas
+    static string[] calculo = { "derivada", "integral", "limite", "continuidad", "tangente" };
+    static string[] geometria = { "vector", "plano", "distancia", "punto", "angulo" };
+    static string[] algebra = { "matriz", "determinante", "sistema", "variable", "parametro" };
+    static string[] logica = { "conjuncion", "disyuncion", "negacion", "condicional", "bicondicional" };
+    static string[] computacion = { "algoritmo", "variable", "bucle", "funcion", "arreglo" };
+
+    // Variables globales
+    static int tema_elegido;
+    static string PabElegida = "";
+    static int num_text;
+    static string antes = "";   // estado actual de la palabra con guiones
+    static int buenas = 0;      // aciertos
+    static int malas = 0;       // errores
+    static int cant = 0;        // cantidad de letras
+
+    static void Main()
+    {
+        Console.WriteLine("Elige un tema: 1-Calculo, 2-Geometría, 3-Computación, 4-Álgebra, 5-Lógica");
+        tema_elegido = int.Parse(Console.ReadLine());
+        Iniciar_juego();
+
+        // Ciclo principal del juego
+        while (malas < 10 && antes.Contains('-'))
+        {
+            Console.Write("Ingresa una letra: ");
+            string entrada = Console.ReadLine();
+            if (string.IsNullOrEmpty(entrada)) continue;
+            char letra = entrada[0];
+            texto_ver(letra);
+        }
+    }
+
+    public static void Iniciar_juego()
+    {
+        PabElegida = temas(tema_elegido);
+        cant = PabElegida.Length;
+        antes = new string('-', cant); // guiones para cada letra
+
+        Console.WriteLine("La palabra tiene " + PabElegida.Length + " letras");
+        Console.WriteLine("Estado actual: " + antes);
+    }
+
+    public static void Buscar_palabra(int cantcad)
+    {
+        Random a = new Random();
+        num_text = a.Next(0, cantcad);
+    }
+
+    public static string temas(int Var)
+    {
+        string Tema_Ele = "";
+        switch (Var)
+        {
+            case 1:
+                Buscar_palabra(calculo.Length);
+                Tema_Ele = calculo[num_text];
+                break;
+            case 2:
+                Buscar_palabra(geometria.Length);
+                Tema_Ele = geometria[num_text];
+                break;
+            case 3:
+                Buscar_palabra(computacion.Length);
+                Tema_Ele = computacion[num_text];
+                break;
+            case 4:
+                Buscar_palabra(algebra.Length);
+                Tema_Ele = algebra[num_text];
+                break;
+            case 5:
+                Buscar_palabra(logica.Length);
+                Tema_Ele = logica[num_text];
+                break;
+        }
+        return Tema_Ele;
+    }
+
+    public static void texto_ver(char letra)
+    {
+        bool esta = false;
+        string nuevoEstado = "";
+
+        for (int x = 0; x < PabElegida.Length; x++)
+        {
+            if (PabElegida[x].ToString().ToLower() == letra.ToString().ToLower())
+            {
+                nuevoEstado += letra; // letra encontrada
+                esta = true;
+            }
+            else
+            {
+                nuevoEstado += antes[x]; // mantener lo que ya estaba
+            }
+        }
+
+        if (esta)
+        {
+            buenas++;
+            antes = nuevoEstado;
+            Console.WriteLine("¡Correcto! Estado: " + antes);
+        }
+        else
+        {
+            malas++;
+            Console.WriteLine("Letra incorrecta. Fallos: " + malas);
+        }
+
+        // Verificar condiciones de fin
+        if (malas >= 9)
+        {
+            Console.WriteLine("HAS PERDIDO, JA JA JA");
+            reset();
+        }
+        else if (!antes.Contains('-'))
+        {
+            Console.WriteLine("FELICIDADES, GANASTE!");
+            reset();
+        }
+    }
+
+    public static void reset()
+    {
+        buenas = 0;
+        malas = 0;
+        antes = "";
+        Console.WriteLine("Juego reiniciado.");
+    }
+}
